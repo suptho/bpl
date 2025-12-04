@@ -15,20 +15,15 @@ from typing import List, Iterator, Optional
 from .tokens import Token, INDENT, DEDENT, NEWLINE, EOF, IDENT, NUMBER, STRING, KEYWORD, OP, DELIM, BOOL, NIL
 from .utils import normalize_unicode, is_identifier_start, is_identifier_part
 from .errors import LexError
+from .unicode_variants import (
+    is_keyword_variant, get_canonical_keyword,
+    is_logical_op_variant, get_canonical_logical_op,
+    CANONICAL_KEYWORDS
+)
 
 
-# Bangla keywords mapping
-KEYWORDS = {
-    "যদি",
-    "নইলে",
-    "যখন",
-    "ফাংশন",
-    "ফলাফল",
-    "সত্য",
-    "মিথ্যা",
-    "নিল",
-    "দেখাও",
-}
+# Bangla keywords mapping (canonical forms only)
+KEYWORDS = CANONICAL_KEYWORDS
 
 # Operators (longest-first will be matched)
 OPERATORS = ["==", "!=", "<=", ">=", "+", "-", "*", "/", "%", "<", ">", "="]
@@ -149,13 +144,22 @@ class Lexer:
                     while i < len(text) and is_identifier_part(text[i]):
                         i += 1
                     name = text[start_i:i]
-                    if name in ("সত্য", "মিথ্যা"):
-                        bval = True if name == "সত্য" else False
-                        self._tokens.append(Token(BOOL, bval, self.lineno, col))
+                    # Check for keyword variants (handles multiple keyboard layouts)
+                    if is_keyword_variant(name):
+                        canonical = get_canonical_keyword(name)
+                        # Special handling for boolean literals
+                        if canonical == "সত্য":
+                            self._tokens.append(Token(BOOL, True, self.lineno, col))
+                        elif canonical == "মিথ্যা":
+                            self._tokens.append(Token(BOOL, False, self.lineno, col))
+                        else:
+                            self._tokens.append(Token(KEYWORD, canonical, self.lineno, col))
+                    # Check for logical operator variants
+                    elif is_logical_op_variant(name):
+                        canonical = get_canonical_logical_op(name)
+                        self._tokens.append(Token(KEYWORD, canonical, self.lineno, col))
                     elif name == "নিল":
                         self._tokens.append(Token(NIL, None, self.lineno, col))
-                    elif name in KEYWORDS:
-                        self._tokens.append(Token(KEYWORD, name, self.lineno, col))
                     else:
                         self._tokens.append(Token(IDENT, name, self.lineno, col))
                     continue

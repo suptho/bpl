@@ -1,0 +1,28 @@
+SOURCE:
+ ফাংশন add(a, b):
+  ফলাফল a + b
+
+দেখাও(add(2, 3))
+
+canonical('ফাংশন'): ফাংশন is_variant: True
+canonical('ফংশন'): ফাংশন is_variant: True
+canonical('দেখাও'): দেখাও is_variant: True
+normalize('ফাংশন') repr: 'ফশন'
+Keyword variant keys sample: ['যদি', 'নইলে', 'অন্যথায়', 'নইতো', 'যখন', 'যতক্ষণ', 'ফাংশন', 'ফংশন', 'ফাংশণ', 'ফলাফল', 'ফেরত', 'রিটার্ন', 'সত্য', 'সঁচা', 'ঠিক', 'মিথ্যা', 'মিথা', 'ভুল', 'নিল', 'শূন্য']
+TOKENS: [('KEYWORD', 'ফাংশন'), ('IDENT', 'add'), ('DELIM', '('), ('IDENT', 'a'), ('DELIM', ','), ('IDENT', 'b'), ('DELIM', ')'), ('DELIM', ':'), ('NEWLINE', '\n'), ('INDENT', 2), ('KEYWORD', 'ফলাফল'), ('IDENT', 'a'), ('OP', '+'), ('IDENT', 'b'), ('NEWLINE', '\n'), ('NEWLINE', '\n'), ('DEDENT', 0), ('KEYWORD', 'দেখাও'), ('DELIM', '('), ('IDENT', 'add')]
+AST type: Program
+Compiled constants count: 3
+Names: ['add', 'দেখাও']
+Instructions:
+0 Instruction(op='LOAD_CONST', arg=0)
+1 Instruction(op='STORE_NAME', arg=0)
+2 Instruction(op='LOAD_NAME', arg=1)
+3 Instruction(op='LOAD_NAME', arg=0)
+4 Instruction(op='LOAD_CONST', arg=1)
+5 Instruction(op='LOAD_CONST', arg=2)
+6 Instruction(op='CALL_FUNCTION', arg=2)
+7 Instruction(op='CALL_FUNCTION', arg=1)
+8 Instruction(op='POP_TOP', arg=None)
+9 Instruction(op='RETURN_VALUE', arg=None)
+5
+VM returned: None

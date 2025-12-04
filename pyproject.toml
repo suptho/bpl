@@ -1,12 +1,61 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bangla_lang"
+name = "bpl-lang"
 version = "0.1.0"
-description = "A beginner-friendly programming language with Bangla syntax."
-authors = [ { name = "You", email = "you@example.com" } ]
+description = "Bangla Programming Language (BPL) - A simple, Python-like language with Bangla syntax"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Suptho", email = "suptho@example.com"}
+]
+keywords = [
+    "bangla",
+    "programming-language",
+    "interpreter",
+    "bengali",
+    "education",
+    "beginner-friendly"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Bengali",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Software Development :: Interpreters",
+]
 
-[tool.pytest]
-python_files = ["tests/test_*.py"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/suptho/bpl"
+Documentation = "https://github.com/suptho/bpl#readme"
+Repository = "https://github.com/suptho/bpl.git"
+Issues = "https://github.com/suptho/bpl/issues"
+
+[project.scripts]
+bpl = "bangla_lang.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bangla_lang*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
