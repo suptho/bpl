@@ -1,0 +1,3 @@
+* 38c4e45 (HEAD -> main) Publish local BPL workspace
+* d9f7900 Initial BPL scaffold: lexer, parser, evaluator, CLI, REPL, examples, transpiler skeleton
+* 8191431 (origin/main, origin/HEAD) Initial commit

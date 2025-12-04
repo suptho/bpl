@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bangla_lang"
+version = "0.1.0"
+description = "A beginner-friendly programming language with Bangla syntax."
+authors = [ { name = "You", email = "you@example.com" } ]
+
+[tool.pytest]
+python_files = ["tests/test_*.py"]
